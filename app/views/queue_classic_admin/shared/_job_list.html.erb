@@ -3,6 +3,28 @@
     <%= hidden_field_tag :q_name, params[:q_name] %>
     <input class="search-query" name="search" placeholder="Search jobs" value="<%= params[:search] %>"/>
   <% end %>
+<div>
+<div class="row">
+  <div class="col-md-8">
+    <ul class="nav nav-pills">
+      <li class="nav-item <%= "active" if params[:q_name].nil? %>">
+        <% link_to "All (#{@scoped_jobs.count})", index_path %>
+      </li>
+      <% @scoped_jobs.queue_counts.each do |q_name, count| %>
+        <li class="nav-item <%= "active" if params[:q_name] == q_name %>">
+          <% link_to "#{q_name} (#{count})", index_path %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="col-md-4">
+    <div id="search" class="pull-right">
+      <%= form_tag(url_for(params), method: "GET") do %>
+      <%= hidden_field_tag :q_name, params[:q_name] %>
+      <input class="search-query" name="search" placeholder="Search jobs" value="<%= params[:search] %>"/>
+      <% end %>
+    </div>
+  </div>
 </div>
 <div class="row">
   <div class="col-md-8">
@@ -48,7 +70,6 @@
         <%= sortable_column column, column.titleize %>
       <% end %>
       <th>
-
       </th>
     </tr>
   </thead>
