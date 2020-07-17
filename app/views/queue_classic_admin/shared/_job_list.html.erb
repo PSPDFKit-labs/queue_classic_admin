@@ -29,33 +29,6 @@
     </div>
   </div>
 </div>
-<div class="row">
-  <div class="col-md-8">
-    <ul class="nav nav-pills">
-      <li class="nav-item">
-        <%= link_to "All (#{@scoped_jobs.count})", index_path, class: "nav-link #{"active" if params[:q_name].nil?}" %>
-      </li>
-      <% @scoped_jobs.queue_counts.each do |q_name, count| %>
-        <li class="nav-item">
-          <%= link_to "#{q_name} (#{count})", index_path(q_name: q_name), class: "nav-link #{"active" if params[:q_name] == q_name}" %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-
-  <div class="col-md-4">
-    <div id="search" class="pull-md-right">
-      <%= form_tag(url_for(params), method: "GET", class: "form-inline") do %>
-        <%= hidden_field_tag :q_name, params[:q_name] %>
-        <div class="form-group">
-          <input class="search-query form-control" name="search" placeholder="Search ..." value="<%= params[:search] %>"/>
-        </div>
-      <% end %>
-    </div>
-  </div>
-</div>
-
-<br>
 
 <br>
 
